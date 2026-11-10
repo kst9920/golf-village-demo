@@ -1,0 +1,300 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex">
+<title>골프 빌리지 커뮤니티 · 화면 데모</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
+<style>
+:root{--navy:#14213D;--navy2:#1D2D52;--gold:#C9A45C;--gold-d:#8A6D2F;--ink:#1E2430;--mut:#8A8F9A;--line:#E9E6DF;--bg:#F6F4EF;--card:#fff;--green:#2F9E62;--green-bg:#E9F5EE;--red:#C0504D}
+*{box-sizing:border-box;margin:0;padding:0}
+html{-webkit-text-size-adjust:100%}
+body{font-family:Pretendard,-apple-system,'Malgun Gothic','Noto Sans KR',sans-serif;background:var(--bg);color:var(--ink);line-height:1.5;padding-bottom:76px}
+button{font:inherit;color:inherit;border:0;background:none;cursor:pointer}
+a{color:inherit;text-decoration:none}
+.wrap{max-width:1080px;margin:0 auto;padding:0 16px}
+.demo-bar{background:#0B0F18;color:#C9CCD4;font-size:12px;text-align:center;padding:7px 12px}
+.demo-bar b{color:var(--gold)}
+/* header (desktop) */
+.top{display:none;background:#fff;border-bottom:1px solid var(--line);position:sticky;top:0;z-index:20}
+.top .wrap{display:flex;align-items:center;height:64px;gap:36px}
+.brand{font-weight:800;letter-spacing:.14em;font-size:14px;color:var(--navy)}
+.brand span{color:var(--gold)}
+.top nav{display:flex;gap:6px;margin-left:auto}
+.top nav button{padding:8px 16px;border-radius:999px;font-size:15px;font-weight:600;color:#555b68}
+.top nav button.on{background:var(--navy);color:#fff}
+/* views */
+.view{display:none}.view.on{display:block}
+/* hero */
+.hero{position:relative;min-height:340px;color:#fff;display:flex;align-items:flex-end;background:linear-gradient(180deg,#0F1B33,#3A4668 50%,#C98F68);background-size:cover;background-position:center 60%}
+.hero::before{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(8,12,24,.72),rgba(8,12,24,.15) 55%,rgba(8,12,24,.55))}
+.hero .wrap{position:relative;width:100%;padding-top:44px;padding-bottom:72px}
+.eyebrow{font-size:11px;font-weight:700;letter-spacing:.16em;color:var(--gold)}
+.eyebrow::after{content:"";display:block;width:24px;height:2px;background:var(--gold);margin:8px 0 12px}
+.hero h1{font-size:28px;line-height:1.3;font-weight:300;letter-spacing:-.02em}
+.hero h1 b{font-weight:800;display:block}
+.hero p{margin-top:10px;font-size:13px;opacity:.85}
+.hero .cta{margin-top:20px;display:inline-block;background:var(--gold);color:#fff;font-weight:700;font-size:15px;padding:12px 22px;border-radius:12px}
+.lift{margin-top:-48px;position:relative}
+.card{background:var(--card);border-radius:16px;padding:18px;box-shadow:0 8px 24px rgba(20,33,61,.08)}
+.card-h{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:12px}
+.card-h h2{font-size:16px;font-weight:800}
+.card-h button{font-size:12px;color:var(--mut)}
+.week{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.week button{background:#F4F1EA;border-radius:10px;padding:10px 12px;display:flex;justify-content:space-between;font-size:14px;font-weight:600}
+.week button b{color:#2F7D4F;font-weight:800}
+.week button:first-child{background:var(--navy);color:#fff}.week button:first-child b{color:var(--gold)}
+.quick{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin:22px 0;text-align:center}
+.quick button{font-size:12px;font-weight:500}
+.quick i{display:grid;place-items:center;width:52px;height:52px;margin:0 auto 6px;border-radius:50%;background:#fff;color:var(--gold);font-style:normal;font-size:20px;box-shadow:0 2px 8px rgba(20,33,61,.06)}
+.cols{display:grid;gap:16px}
+.list li{list-style:none;display:flex;gap:10px;align-items:center;padding:11px 0;border-top:1px solid var(--line);font-size:14px}
+.list li:first-child{border-top:0}
+.tag{flex:none;font-size:11px;font-weight:700;padding:2px 8px;border-radius:5px;background:#EFEAE0;color:var(--gold-d)}
+.tag.n{background:var(--navy);color:#fff}
+.list .t{flex:1;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.list time{flex:none;font-size:12px;color:var(--mut)}
+/* booking */
+.page-h{background:var(--navy);color:#fff;padding:26px 0 22px}
+.page-h h1{font-size:22px;font-weight:800}
+.page-h p{font-size:13px;color:var(--gold);margin-top:2px}
+.book{display:grid;gap:16px;margin-top:16px}
+.cal-nav{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px}
+.cal-nav b{font-size:17px}
+.cal-nav button{width:36px;height:36px;border-radius:50%;font-size:20px;color:var(--mut)}
+.cal-nav button:disabled{opacity:.25;cursor:default}
+.cal{display:grid;grid-template-columns:repeat(7,1fr);row-gap:4px;text-align:center}
+.cal .wd{font-size:12px;font-weight:600;color:var(--mut);padding:6px 0}
+.cal .wd:first-child{color:var(--red)}.cal .wd:last-child{color:#3A6EA5}
+.day{position:relative;height:48px;border-radius:12px;font-size:15px;font-weight:500;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px}
+.day.sun{color:var(--red)}
+.day:disabled{color:#C9CCD2;cursor:default}
+.day .dot{width:5px;height:5px;border-radius:50%;background:transparent}
+.day.av .dot{background:var(--green)}.day.full .dot{background:#C5C8CE}
+.day.today{box-shadow:inset 0 0 0 1.5px var(--gold)}
+.day.sel{background:var(--navy);color:#fff;font-weight:800}.day.sel .dot{background:var(--gold)}
+.legend{display:flex;gap:14px;font-size:12px;color:var(--mut);margin-top:12px}
+.legend i{display:inline-block;width:7px;height:7px;border-radius:50%;margin-right:5px}
+.slots-h{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:10px}
+.slots-h h2{font-size:16px;font-weight:800}.slots-h span{font-size:13px;font-weight:700;color:#2F7D4F}
+.slot{width:100%;display:flex;align-items:center;gap:14px;padding:13px 14px;border-radius:12px;background:#fff;border:1.5px solid var(--line);margin-bottom:8px;text-align:left}
+.slot b{font-size:17px;font-weight:800;width:54px}
+.slot span{flex:1;font-size:13px;color:var(--mut)}
+.slot em{font-style:normal;font-size:12px;font-weight:700;padding:5px 12px;border-radius:999px;background:var(--green-bg);color:#2F7D4F}
+.slot.sel{border-color:var(--gold)}.slot.sel em{background:var(--gold);color:#fff}
+.slot:disabled{cursor:default}.slot:disabled b{color:#B5B8BF}.slot:disabled em{background:#EEEEF0;color:#A0A4AB}
+.slot.mine em{background:var(--navy);color:#fff}
+.go{width:100%;padding:15px;border-radius:14px;background:var(--navy);color:#fff;font-weight:800;font-size:16px;margin-top:6px}
+.go:disabled{background:#C9CCD4;cursor:default}
+.empty{padding:28px 0;text-align:center;color:var(--mut);font-size:14px}
+.rule{font-size:12px;color:var(--mut);margin-top:10px}
+/* board / my */
+.board .list li{padding:14px 0}
+.cnt{flex:none;font-size:12px;color:var(--gold-d);font-weight:700}
+.my-item{display:flex;align-items:center;gap:12px;padding:14px 0;border-top:1px solid var(--line)}
+.my-item:first-child{border-top:0}
+.my-item div{flex:1}.my-item b{font-size:15px}.my-item small{display:block;color:var(--mut);font-size:12px}
+.my-item button{font-size:13px;font-weight:700;color:var(--red);padding:7px 12px;border:1px solid #E7CFCE;border-radius:8px}
+.note{font-size:12px;color:var(--mut);text-align:center;margin:26px 0 8px;padding:0 16px}
+/* tab bar (mobile) */
+.tabs{position:fixed;left:0;right:0;bottom:0;background:#fff;border-top:1px solid var(--line);display:grid;grid-template-columns:repeat(4,1fr);padding:8px 0 calc(8px + env(safe-area-inset-bottom));z-index:30}
+.tabs button{font-size:11px;font-weight:500;color:var(--mut);display:flex;flex-direction:column;align-items:center;gap:4px}
+.tabs i{width:10px;height:10px;border-radius:50%;background:#C5C8CE}
+.tabs button.on{color:var(--navy);font-weight:700}.tabs button.on i{background:var(--gold);transform:scale(1.2)}
+/* modal */
+.modal{position:fixed;inset:0;background:rgba(11,15,24,.55);display:none;align-items:center;justify-content:center;padding:20px;z-index:50}
+.modal.on{display:flex}
+.sheet{background:#fff;border-radius:18px;padding:26px 22px;max-width:360px;width:100%;text-align:center}
+.sheet .ok{width:54px;height:54px;border-radius:50%;background:var(--green-bg);color:var(--green);display:grid;place-items:center;font-size:26px;margin:0 auto 14px}
+.sheet h3{font-size:19px;font-weight:800}.sheet p{font-size:14px;color:#555b68;margin:8px 0 18px}
+.sheet button{width:100%;padding:13px;border-radius:12px;background:var(--navy);color:#fff;font-weight:700}
+button:focus-visible{outline:2px solid var(--gold);outline-offset:2px}
+@media (min-width:860px){
+ body{padding-bottom:0}
+ .tabs{display:none}.top{display:block}
+ .hero{min-height:460px}.hero h1{font-size:44px}.hero p{font-size:16px}
+ .hero .wrap{padding-bottom:96px}
+ .cols{grid-template-columns:1.1fr 1fr}
+ .quick{grid-template-columns:repeat(4,160px);justify-content:center;gap:24px;margin:34px 0}
+ .quick i{width:64px;height:64px;font-size:24px}.quick button{font-size:14px}
+ .book{grid-template-columns:1.15fr 1fr;align-items:start;margin-top:24px}
+ .day{height:58px;font-size:16px}
+ .page-h{padding:40px 0 34px}.page-h h1{font-size:30px}
+}
+@media (prefers-reduced-motion:no-preference){.view.on{animation:f .25s ease}@keyframes f{from{opacity:0;transform:translateY(6px)}}}
+</style>
+</head>
+<body>
+<div class="demo-bar"><b>DEMO</b> · 제안용 화면 시안입니다. 표시된 데이터는 예시이며 실제 저장되지 않습니다.</div>
+
+<header class="top"><div class="wrap">
+  <div class="brand">GOLF <span>VILLAGE</span></div>
+  <nav id="nav-top"></nav>
+</div></header>
+
+<main>
+<section class="view on" id="v-home">
+  <div class="hero" id="hero"><div class="wrap">
+    <div class="eyebrow">GOLF VILLAGE</div>
+    <h1>자연과 함께하는<b>프리미엄 주거단지</b></h1>
+    <p>입주민을 위한 공식 커뮤니티</p>
+    <button class="cta" data-go="book">잔여티 예약하기</button>
+  </div></div>
+  <div class="wrap">
+    <div class="card lift">
+      <div class="card-h"><h2>이번 주 잔여티</h2><button data-go="book">전체 보기 ›</button></div>
+      <div class="week" id="week"></div>
+    </div>
+    <div class="quick">
+      <button data-go="board"><i>◈</i>마을 소개</button>
+      <button data-go="board"><i>✎</i>공지사항</button>
+      <button data-go="board"><i>☰</i>커뮤니티</button>
+      <button data-go="board"><i>✦</i>생활정보</button>
+    </div>
+    <div class="cols">
+      <div class="card"><div class="card-h"><h2>마을 소식</h2><button data-go="board">더보기 ›</button></div>
+        <ul class="list">
+          <li><span class="tag n">공지</span><span class="t">동절기 골프장 휴장 및 2월 재개장 안내</span><time>11.09</time></li>
+          <li><span class="tag">행사</span><span class="t">입주민 송년 모임 참가 신청</span><time>11.07</time></li>
+          <li><span class="tag">안내</span><span class="t">커뮤니티 시설 이용 시간 변경</span><time>11.03</time></li>
+        </ul></div>
+      <div class="card"><div class="card-h"><h2>생활 편의정보</h2><button data-go="board">더보기 ›</button></div>
+        <ul class="list">
+          <li><span class="tag">안내</span><span class="t">관리사무소 운영 시간 및 문의 방법</span><time>상시</time></li>
+          <li><span class="tag">일정</span><span class="t">11월 단지 조경 관리 일정</span><time>11.12</time></li>
+          <li><span class="tag">자료</span><span class="t">시설 이용 신청서 양식</span><time>10.28</time></li>
+        </ul></div>
+    </div>
+  </div>
+</section>
+
+<section class="view" id="v-book">
+  <div class="page-h"><div class="wrap"><h1>잔여티 예약</h1><p>입주민 전용 · 날짜를 선택하세요</p></div></div>
+  <div class="wrap book">
+    <div class="card">
+      <div class="cal-nav"><button id="prev" aria-label="이전 달">‹</button><b id="ym"></b><button id="next" aria-label="다음 달">›</button></div>
+      <div class="cal" id="cal"></div>
+      <div class="legend"><span><i style="background:var(--green)"></i>예약 가능</span><span><i style="background:#C5C8CE"></i>마감</span><span><i style="box-shadow:0 0 0 1.5px var(--gold)"></i>오늘</span></div>
+    </div>
+    <div>
+      <div class="slots-h"><h2 id="sel-date"></h2><span id="sel-left"></span></div>
+      <div id="slots"></div>
+      <button class="go" id="go" disabled>시간을 선택하세요</button>
+      <p class="rule">· 회원당 주 2회까지 예약할 수 있습니다. (관리자 설정 예시)<br>· 예약이 완료되면 해당 티타임은 자동으로 마감됩니다.</p>
+    </div>
+  </div>
+</section>
+
+<section class="view" id="v-board">
+  <div class="page-h"><div class="wrap"><h1>커뮤니티</h1><p>승인된 입주민만 글을 쓸 수 있습니다</p></div></div>
+  <div class="wrap" style="margin-top:16px"><div class="card board">
+    <ul class="list">
+      <li><span class="tag n">공지</span><span class="t">동절기 골프장 휴장 및 2월 재개장 안내</span><span class="cnt">3</span><time>11.09</time></li>
+      <li><span class="tag">자유</span><span class="t">주말 라운딩 같이 하실 분 계신가요</span><span class="cnt">5</span><time>11.08</time></li>
+      <li><span class="tag">정보</span><span class="t">단지 근처 세차장 추천드립니다</span><span class="cnt">2</span><time>11.06</time></li>
+      <li><span class="tag">자유</span><span class="t">가을 단지 풍경 사진 공유합니다</span><span class="cnt">8</span><time>11.04</time></li>
+      <li><span class="tag">정보</span><span class="t">분리수거 요일 변경 안내 공유</span><span class="cnt">1</span><time>11.02</time></li>
+    </ul></div></div>
+</section>
+
+<section class="view" id="v-my">
+  <div class="page-h"><div class="wrap"><h1>내 예약</h1><p>예약 내역 확인 및 취소</p></div></div>
+  <div class="wrap" style="margin-top:16px"><div class="card" id="my"></div></div>
+</section>
+<p class="note">배경 사진은 무료 스톡 사진 예시이며, 실제 제작 시 단지 사진으로 교체합니다.</p>
+</main>
+
+<nav class="tabs" id="nav-tab"></nav>
+
+<div class="modal" id="modal" role="dialog" aria-modal="true"><div class="sheet">
+  <div class="ok">✓</div><h3>예약이 완료되었습니다</h3><p id="m-text"></p><button id="m-ok">내 예약 보기</button>
+</div></div>
+
+<script>
+const TABS=[['home','홈'],['book','예약'],['board','커뮤니티'],['my','내 예약']];
+const WD=['일','월','화','수','목','금','토'];
+const TIMES=[['07:12','OUT 코스'],['07:40','OUT 코스'],['08:08','IN 코스'],['12:30','IN 코스'],['13:05','OUT 코스']];
+const today=new Date();today.setHours(0,0,0,0);
+const key=d=>d.getFullYear()+'-'+(d.getMonth()+1)+'-'+d.getDate();
+const taken={}, mine=[];
+let view=new Date(today.getFullYear(),today.getMonth(),1), sel=null, pick=null;
+
+// 날짜별 예시 잔여티: 날짜 숫자로 정해지는 고정 패턴
+function slotsOf(d){
+  const diff=Math.round((d-today)/864e5);
+  if(diff<1||diff>35) return [];
+  const s=(d.getDate()*7+d.getMonth()*3)%10;
+  if(s<2) return [];
+  return TIMES.map((t,i)=>{
+    const open=((s+i*3)%5)<3;
+    const k=key(d)+' '+t[0];
+    return {time:t[0],course:t[1],state:taken[k]?'mine':s>=8?'full':open?'open':'full',k};
+  });
+}
+function go(v){
+  document.querySelectorAll('.view').forEach(e=>e.classList.toggle('on',e.id==='v-'+v));
+  document.querySelectorAll('[data-tab]').forEach(e=>e.classList.toggle('on',e.dataset.tab===v));
+  if(v==='my') renderMy();
+  window.scrollTo(0,0);
+}
+function renderNav(){
+  document.getElementById('nav-top').innerHTML=TABS.map(([k,t])=>`<button data-tab="${k}" data-go="${k}">${t}</button>`).join('');
+  document.getElementById('nav-tab').innerHTML=TABS.map(([k,t])=>`<button data-tab="${k}" data-go="${k}"><i></i>${t}</button>`).join('');
+}
+function renderWeek(){
+  const out=[];
+  for(let i=1;i<=21&&out.length<3;i++){const d=new Date(today);d.setDate(d.getDate()+i);const n=slotsOf(d).filter(s=>s.state==='open').length;if(n)out.push([d,n]);}
+  document.getElementById('week').innerHTML=out.map(([d,n])=>`<button data-date="${d.getTime()}">${d.getDate()}(${WD[d.getDay()]})<b>${n}팀</b></button>`).join('');
+}
+function renderCal(){
+  const y=view.getFullYear(),m=view.getMonth();
+  document.getElementById('ym').textContent=y+'년 '+(m+1)+'월';
+  document.getElementById('prev').disabled=y===today.getFullYear()&&m===today.getMonth();
+  const first=new Date(y,m,1).getDay(),last=new Date(y,m+1,0).getDate();
+  let h=WD.map(w=>`<div class="wd">${w}</div>`).join('')+'<div></div>'.repeat(first);
+  for(let dd=1;dd<=last;dd++){
+    const d=new Date(y,m,dd),ss=slotsOf(d),open=ss.filter(s=>s.state==='open').length;
+    const cls=['day',d.getDay()===0?'sun':'',open?'av':ss.length?'full':'',+d===+today?'today':'',sel&&+d===+sel?'sel':''].join(' ');
+    h+=`<button class="${cls}" ${ss.length?'':'disabled'} data-date="${d.getTime()}" aria-label="${m+1}월 ${dd}일${open?' 예약 가능 '+open+'팀':ss.length?' 마감':''}">${dd}<span class="dot"></span></button>`;
+  }
+  document.getElementById('cal').innerHTML=h;
+}
+function renderSlots(){
+  const box=document.getElementById('slots'),btn=document.getElementById('go');
+  if(!sel){document.getElementById('sel-date').textContent='날짜를 선택하세요';document.getElementById('sel-left').textContent='';box.innerHTML='<div class="empty">달력에서 초록 점이 있는 날짜를 누르면<br>예약 가능한 시간이 표시됩니다.</div>';btn.disabled=true;btn.textContent='시간을 선택하세요';return;}
+  const ss=slotsOf(sel),open=ss.filter(s=>s.state==='open').length;
+  document.getElementById('sel-date').textContent=(sel.getMonth()+1)+'월 '+sel.getDate()+'일 ('+WD[sel.getDay()]+')';
+  document.getElementById('sel-left').textContent=open?'잔여 '+open+'팀':'마감';
+  box.innerHTML=ss.map(s=>`<button class="slot ${s.state==='mine'?'mine':''} ${pick===s.k?'sel':''}" ${s.state==='open'?'':'disabled'} data-slot="${s.k}"><b>${s.time}</b><span>${s.course} · 4인</span><em>${s.state==='mine'?'내 예약':s.state==='full'?'마감':pick===s.k?'선택됨':'예약 가능'}</em></button>`).join('');
+  const p=ss.find(s=>s.k===pick);
+  btn.disabled=!p;btn.textContent=p?(sel.getMonth()+1)+'/'+sel.getDate()+' '+p.time+' 예약하기':'시간을 선택하세요';
+}
+function renderMy(){
+  document.getElementById('my').innerHTML=mine.length?mine.map((r,i)=>`<div class="my-item"><div><b>${r.label}</b><small>${r.course} · 4인 · 예약 완료</small></div><button data-cancel="${i}">예약 취소</button></div>`).join(''):'<div class="empty">예약 내역이 없습니다.<br>예약 탭에서 잔여티를 예약해 보세요.</div>';
+}
+function selectDate(t){sel=new Date(+t);pick=null;view=new Date(sel.getFullYear(),sel.getMonth(),1);renderCal();renderSlots();}
+document.addEventListener('click',e=>{
+  const b=e.target.closest('button');if(!b)return;
+  if(b.dataset.date){if(!document.getElementById('v-book').classList.contains('on'))go('book');selectDate(b.dataset.date);return;}
+  if(b.dataset.go){go(b.dataset.go);return;}
+  if(b.dataset.slot){pick=b.dataset.slot;renderSlots();return;}
+  if(b.dataset.cancel){const r=mine.splice(+b.dataset.cancel,1)[0];delete taken[r.k];renderMy();renderCal();renderSlots();renderWeek();return;}
+  if(b.id==='prev'){view.setMonth(view.getMonth()-1);renderCal();return;}
+  if(b.id==='next'){view.setMonth(view.getMonth()+1);renderCal();return;}
+  if(b.id==='go'&&pick){
+    const s=slotsOf(sel).find(x=>x.k===pick);taken[pick]=1;
+    const label=(sel.getMonth()+1)+'월 '+sel.getDate()+'일 ('+WD[sel.getDay()]+') '+s.time;
+    mine.push({k:pick,label,course:s.course});pick=null;
+    document.getElementById('m-text').textContent=label+' · '+s.course+' 예약이 접수되었습니다. 해당 티타임은 마감 처리됩니다.';
+    document.getElementById('modal').classList.add('on');renderCal();renderSlots();renderWeek();return;
+  }
+  if(b.id==='m-ok'){document.getElementById('modal').classList.remove('on');go('my');}
+});
+// 배경 사진: 불러오지 못하면 기본 그라데이션 유지
+const im=new Image();im.onload=()=>{document.getElementById('hero').style.backgroundImage='url('+im.src+')'};
+im.src='https://images.pexels.com/photos/6871281/pexels-photo-6871281.jpeg?auto=compress&cs=tinysrgb&w=1600';
+renderNav();renderWeek();renderCal();renderSlots();go('home');
+</script>
+</body>
+</html>
